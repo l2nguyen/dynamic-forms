@@ -1,0 +1,139 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - know_question
+  - dont_know_question
+  - know_email
+  - dont_know_email
+  - recover_password
+
+slots:
+  known_question:
+    type: bool
+    mappings:
+    - type: from_intent
+      value: true
+      intent: affirm
+      conditions:
+      - active_loop: password_recover_form
+        requested_slot: known_question
+    - type: from_intent
+      value: false
+      intent: deny
+      conditions:
+      - active_loop: password_recover_form
+        requested_slot: known_question
+    - type: from_intent
+      value: true
+      intent: know_question
+    - type: from_intent
+      value: false
+      intent: dont_know_question
+    - type: from_trigger_intent
+      value: false
+      intent: recover_password+dont_know_question
+
+  known_email:
+    type: bool
+    mappings:
+    - type: from_intent
+      value: true
+      intent: affirm
+      conditions:
+      - active_loop: password_recover_form
+        requested_slot: known_email
+    - type: from_intent
+      value: false
+      intent: deny
+      conditions:
+      - active_loop: password_recover_form
+        requested_slot: known_email
+    - type: from_intent
+      value: true
+      intent: know_email
+    - type: from_intent
+      value: false
+      intent: dont_know_email
+    - type: from_trigger_intent
+      value: false
+      intent: recover_password+dont_know_email
+
+actions:
+ - validate_password_recover_form
+
+forms:
+  password_recover_form:
+    required_slots:
+      - known_question
+
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_ask_known_question:
+  - text: "Do you know the answer to the safety question?"
+    buttons:
+    - title: "Yes"
+      payload: "/affirm"
+    - title: "No"
+      payload: "/deny"
+
+  utter_ask_known_email:
+  - text: "Do you know the associated email?"
+    buttons:
+    - title: "Yes"
+      payload: "/affirm"
+    - title: "No"
+      payload: "/deny"
+
+  utter_slots_values:
+  - text: "Slot values:\nknown_question: {known_question}\nknown_email: {known_email}"
+
+  utter_submit_password_recover_form:
+  - condition:
+    - type: slot
+      name: known_question
+      value: true
+    text: "Answer to safety question known, then Z..."
+  - condition:
+    - type: slot
+      name: known_email
+      value: true
+    text: "Associated email known, then X..."
+  - condition:
+    - type: slot
+      name: known_question
+      value: false
+    - type: slot
+      name: known_email
+      value: false
+    text: "Both safety question and associated email is not known, then Y..."
+  - text: "Default text to handle other cases (something like: I'm not sure how I can help you, please contact..."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

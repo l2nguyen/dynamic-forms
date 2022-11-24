@@ -1,0 +1,38 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+# see: https://rasa.com/docs/rasa/forms#activating-a-form
+#      https://rasa.com/docs/rasa/stories/#or-statements
+- rule: Activate password_recover_form
+  steps:
+  - or:
+    - intent: recover_password
+    - intent: recover_password+dont_know_question
+    - intent: recover_password+dont_know_email
+  - action: password_recover_form
+  - active_loop: password_recover_form
+
+- rule: Submit password_recover_form
+  condition:
+  # Condition that form is active.
+  - active_loop: password_recover_form
+  steps:
+  # Form is deactivated
+  - action: password_recover_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: utter_submit_password_recover_form
+  - action: utter_slots_values
