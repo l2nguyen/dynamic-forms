@@ -36,3 +36,9 @@ rules:
   # The actions we want to run when the form is submitted.
   - action: utter_submit_password_recover_form
   - action: utter_slots_values
+
+- rule: Activate example_flow_form
+  steps:
+  - intent: activate_example_flow
+  - action: example_flow_form
+  - active_loop: example_flow_form
