@@ -20,6 +20,8 @@ class ValidateRecoverPasswordForm(FormValidationAction):
     ) -> List[Text]:
         # see: https://rasa.com/docs/rasa/forms/#dynamic-form-behavior
 
+        print("recover password form required_slots method")
+
         additional_slots = ["known_question"]
         if tracker.slots.get("known_question") is False:
             # If the user doesn't know the answer to the safety question, ask
@@ -41,18 +43,17 @@ class ValidateExampleFlowForm(FormValidationAction):
         tracker: "Tracker",
         domain: "DomainDict",
     ) -> List[Text]:
-        # see: https://rasa.com/docs/rasa/forms/#dynamic-form-behavior
+
+        print("example flow form required_slots method")
 
         additional_slots = []
         
         if tracker.slots.get("question1") is True:
-            # If the user doesn't know the answer to the safety question, ask
-            # if they know the associated email
             additional_slots.append("question2")
             
         if tracker.slots.get("question2") is True:
-            # If the user doesn't know the answer to the safety question, ask
-            # if they know the associated email
             additional_slots.append("question3")
+            
+        updated_slots = additional_slots + domain_slots
 
-        return domain_slots + additional_slots
+        return updated_slots
