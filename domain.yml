@@ -184,7 +184,7 @@ responses:
       name: known_email
       value: false
     text: "Both safety question and associated email is not known, then Y..."
-  - text: "Default text to handle other cases (something like: I'm not sure how I can help you, please contact..."
+  - text: "Default text to handle other cases (ie I'm not sure how I can help you, please contact...)""
 
 session_config:
   session_expiration_time: 60
