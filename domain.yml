@@ -65,6 +65,55 @@ slots:
       value: false
       intent: recover_password+dont_know_email
 
+  question1:
+    type: bool
+    mappings:
+    - type: from_intent
+      value: true
+      intent: affirm
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question1
+    - type: from_intent
+      value: false
+      intent: deny
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question1
+
+  question2:
+    type: bool
+    mappings:
+    - type: from_intent
+      value: true
+      intent: affirm
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question2
+    - type: from_intent
+      value: false
+      intent: deny
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question2
+
+  question3:
+    type: bool
+    mappings:
+    - type: from_intent
+      value: true
+      intent: affirm
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question3
+    - type: from_intent
+      value: false
+      intent: deny
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question3
+
+
 actions:
  - validate_password_recover_form
 
@@ -72,6 +121,9 @@ forms:
   password_recover_form:
     required_slots:
       - known_question
+  example_flow_form:
+    required_slots:
+      - question1
 
 
 responses:
