@@ -1,5 +1,9 @@
 version: "3.1"
 
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
 intents:
   - greet
   - goodbye
@@ -116,6 +120,7 @@ slots:
 
 actions:
  - validate_password_recover_form
+ - validate_example_flow_form
 
 forms:
   password_recover_form:
@@ -184,8 +189,31 @@ responses:
       name: known_email
       value: false
     text: "Both safety question and associated email is not known, then Y..."
-  - text: "Default text to handle other cases (ie I'm not sure how I can help you, please contact...)""
+  - text: "Default text to handle other cases (ie I'm not sure how I can help you, please contact...)"
 
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  utter_ask_question1:
+  - text: "question 1 in example_flow form"
+    buttons:
+    - title: "Yes"
+      payload: "/affirm"
+    - title: "No"
+      payload: "/deny"
+
+  utter_ask_question2:
+  - text: "question 2 in example_flow form"
+    buttons:
+    - title: "Yes"
+      payload: "/affirm"
+    - title: "No"
+      payload: "/deny"
+
+  utter_ask_question3:
+  - text: "question 3 in example_flow form"
+    buttons:
+    - title: "Yes"
+      payload: "/affirm"
+    - title: "No"
+      payload: "/deny"
+
+  utter_submit_example_flow_form:
+  - text: "Slot values:\nquestion1: {question1}\nquestion2: {question2}\nquestion3: {question3}"
