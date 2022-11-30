@@ -1,5 +1,9 @@
 version: "3.1"
 
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
 intents:
   - greet
   - goodbye
@@ -65,13 +69,66 @@ slots:
       value: false
       intent: recover_password+dont_know_email
 
+  question1:
+    type: bool
+    mappings:
+    - type: from_intent
+      value: true
+      intent: affirm
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question1
+    - type: from_intent
+      value: false
+      intent: deny
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question1
+
+  question2:
+    type: bool
+    mappings:
+    - type: from_intent
+      value: true
+      intent: affirm
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question2
+    - type: from_intent
+      value: false
+      intent: deny
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question2
+
+  question3:
+    type: bool
+    mappings:
+    - type: from_intent
+      value: true
+      intent: affirm
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question3
+    - type: from_intent
+      value: false
+      intent: deny
+      conditions:
+      - active_loop: example_flow_form
+        requested_slot: question3
+
+
 actions:
  - validate_password_recover_form
+ - validate_example_flow_form
 
 forms:
   password_recover_form:
     required_slots:
       - known_question
+  example_flow_form:
+    required_slots:
+      - question1
 
 
 responses:
@@ -132,13 +189,17 @@ responses:
       name: known_email
       value: false
     text: "Both safety question and associated email is not known, then Y..."
-  - text: "Default text to handle other cases (something like: I'm not sure how I can help you, please contact..."
+  - text: "Default text to handle other cases (ie I'm not sure how I can help you, please contact...)"
 
-<<<<<<< Updated upstream
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
-=======
+
+  utter_ask_question1:
+  - text: "question 1 in example_flow form"
+    buttons:
+    - title: "Yes"
+      payload: "/affirm"
+    - title: "No"
+      payload: "/deny"
+
   utter_ask_question2:
   - text: "question 2 in example_flow form"
     buttons:
@@ -156,6 +217,7 @@ session_config:
       payload: "/deny"
 
   utter_submit_example_flow_form:
+  - text: "Slot values:\nquestion1: {question1}\nquestion2: {question2}\nquestion3: {question3}"
   - condition:
     - type: slot
       name: question1
@@ -168,6 +230,3 @@ session_config:
     text: "Please fill form B"
   - text: "Default text to handle other cases (ie I'm not sure how I can help you, please contact...)"
   
-  utter_slots_values_example_flow_form:
-  - text: "Slot values:\nquestion1: {question1}\nquestion2: {question2}\nquestion3: {question3}"
->>>>>>> Stashed changes
