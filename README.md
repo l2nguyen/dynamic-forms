@@ -40,6 +40,6 @@ For more information about the individual commands, please check out our
 [documentation](http://rasa.com/docs/rasa/command-line-interface).
 
 4. Activate the relevant form
-To activate the `password_recover_form`, say `recover_password` by saying "I lost my password" or `/recover_password` to the bot.
+To activate the `password_recover_form`, say "I lost my password" or `/recover_password` to the bot.
 
-To activate the 
+To activate the `example_flow_form`, say "go to dynamic forms example" or `/activate_example_flow` to the bot.
