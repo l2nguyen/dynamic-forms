@@ -143,3 +143,9 @@ nlu:
     - I don't remember my password and my email account
     - I want to recover my password but I don't know the email account
     - Lost my password and I don't have my email account
+
+- intent: activate_example_flow
+  examples: |
+    - go go example flow form
+    - activate example flow form
+    - go to dynamic forms example

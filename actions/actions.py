@@ -2,9 +2,10 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.types import DomainDict
 
 
-class ValidateRecoverPassword(FormValidationAction):
+class ValidateRecoverPasswordForm(FormValidationAction):
     """Example of a form validation action."""
 
     def name(self) -> Text:
@@ -18,6 +19,8 @@ class ValidateRecoverPassword(FormValidationAction):
         domain: "DomainDict",
     ) -> List[Text]:
         # see: https://rasa.com/docs/rasa/forms/#dynamic-form-behavior
+
+        print("recover password form required_slots method")
 
         additional_slots = ["known_question"]
         if tracker.slots.get("known_question") is False:
