@@ -17,6 +17,7 @@ intents:
   - know_email
   - dont_know_email
   - recover_password
+  - activate_example_flow
 
 slots:
   known_question:
@@ -217,7 +218,6 @@ responses:
       payload: "/deny"
 
   utter_submit_example_flow_form:
-  - text: "Slot values:\nquestion1: {question1}\nquestion2: {question2}\nquestion3: {question3}"
   - condition:
     - type: slot
       name: question1
@@ -226,7 +226,14 @@ responses:
   - condition:
     - type: slot
       name: question2
-      value: false
+      value: true
     text: "Please fill form B"
+  - condition:
+    - type: slot
+      name: question2
+      value: false
+    text: "Please fill form C"
   - text: "Default text to handle other cases (ie I'm not sure how I can help you, please contact...)"
-  
+
+  utter_slots_values_example_flow_form:
+  - text: "Slot values:\nquestion1: {question1}\nquestion2: {question2}\nquestion3: {question3}"
