@@ -167,7 +167,7 @@ responses:
     - title: "No"
       payload: "/deny"
 
-  utter_slots_values:
+  utter_slots_values_recover_form:
   - text: "Slot values:\nknown_question: {known_question}\nknown_email: {known_email}"
 
   utter_submit_password_recover_form:
@@ -190,6 +190,7 @@ responses:
       value: false
     text: "Both safety question and associated email is not known, then Y..."
   - text: "Default text to handle other cases (ie I'm not sure how I can help you, please contact...)"
+
 
   utter_ask_question1:
   - text: "question 1 in example_flow form"
@@ -217,3 +218,15 @@ responses:
 
   utter_submit_example_flow_form:
   - text: "Slot values:\nquestion1: {question1}\nquestion2: {question2}\nquestion3: {question3}"
+  - condition:
+    - type: slot
+      name: question1
+      value: false
+    text: "Please fill form A"
+  - condition:
+    - type: slot
+      name: question2
+      value: false
+    text: "Please fill form B"
+  - text: "Default text to handle other cases (ie I'm not sure how I can help you, please contact...)"
+  

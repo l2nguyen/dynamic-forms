@@ -35,7 +35,7 @@ rules:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
   - action: utter_submit_password_recover_form
-  - action: utter_slots_values
+  - action: utter_slots_values_recover_form
 
 - rule: Activate example_flow_form
   steps:
@@ -55,3 +55,4 @@ rules:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
   - action: utter_submit_example_flow_form
+  - action: utter_slots_values_example_flow_form
