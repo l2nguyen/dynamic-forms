@@ -35,4 +35,28 @@ rules:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
   - action: utter_submit_password_recover_form
+<<<<<<< Updated upstream
   - action: utter_slots_values
+=======
+  - action: utter_slots_values_recover_form
+
+- rule: Activate example_flow_form
+  steps:
+  - intent: activate_example_flow
+  - action: example_flow_form
+  - active_loop: example_flow_form
+
+- rule: Submit example_flow_form
+  condition:
+  # Condition that form is active.
+  - active_loop: example_flow_form
+  steps:
+  # Form is deactivated
+  - action: example_flow_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: utter_submit_example_flow_form
+  - action: utter_slots_values_example_flow_form
+>>>>>>> Stashed changes
