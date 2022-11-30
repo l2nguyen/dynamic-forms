@@ -51,7 +51,7 @@ class ValidateExampleFlowForm(FormValidationAction):
         if tracker.slots.get("question1") is True:
             additional_slots.append("question2")
             
-        if tracker.slots.get("question2") is True:
+        if tracker.slots.get("question2") is False:
             additional_slots.append("question3")
             
         updated_slots = additional_slots + domain_slots
