@@ -26,3 +26,31 @@ class ValidateRecoverPassword(FormValidationAction):
             additional_slots.append("known_email")
 
         return additional_slots + domain_slots
+
+class ValidateExampleFlowForm(FormValidationAction):
+    """Example of a form validation action."""
+
+    def name(self) -> Text:
+        return "validate_example_flow_form"
+
+    async def required_slots(
+        self,
+        domain_slots: List[Text],
+        dispatcher: "CollectingDispatcher",
+        tracker: "Tracker",
+        domain: "DomainDict",
+    ) -> List[Text]:
+
+        print("example flow form required_slots method")
+
+        additional_slots = []
+        
+        if tracker.slots.get("question1") is True:
+            additional_slots.append("question2")
+            
+        if tracker.slots.get("question2") is True:
+            additional_slots.append("question3")
+            
+        updated_slots = additional_slots + domain_slots
+
+        return updated_slots
