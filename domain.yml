@@ -110,7 +110,7 @@ responses:
     - title: "No"
       payload: "/deny"
 
-  utter_slots_values:
+  utter_slots_values_recover_form:
   - text: "Slot values:\nknown_question: {known_question}\nknown_email: {known_email}"
 
   utter_submit_password_recover_form:
@@ -134,6 +134,40 @@ responses:
     text: "Both safety question and associated email is not known, then Y..."
   - text: "Default text to handle other cases (something like: I'm not sure how I can help you, please contact..."
 
+<<<<<<< Updated upstream
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+=======
+  utter_ask_question2:
+  - text: "question 2 in example_flow form"
+    buttons:
+    - title: "Yes"
+      payload: "/affirm"
+    - title: "No"
+      payload: "/deny"
+
+  utter_ask_question3:
+  - text: "question 3 in example_flow form"
+    buttons:
+    - title: "Yes"
+      payload: "/affirm"
+    - title: "No"
+      payload: "/deny"
+
+  utter_submit_example_flow_form:
+  - condition:
+    - type: slot
+      name: question1
+      value: false
+    text: "Please fill form A"
+  - condition:
+    - type: slot
+      name: question2
+      value: false
+    text: "Please fill form B"
+  - text: "Default text to handle other cases (ie I'm not sure how I can help you, please contact...)"
+  
+  utter_slots_values_example_flow_form:
+  - text: "Slot values:\nquestion1: {question1}\nquestion2: {question2}\nquestion3: {question3}"
+>>>>>>> Stashed changes
